@@ -41,6 +41,7 @@ class Index {
 
 	//  ------------- Gestion des selects --------------- 
 
+	// Liste des ingredients dans tableau des recettes
 	
 		selectIngredientsList(){
 		const ingOptions = []
@@ -77,7 +78,7 @@ class Index {
 
 	// recherche via la search bar (titres, ustensils, ingredients, appliances)
 
-   
+    
 	filterGlobalRecipe(value, recipe) {
 		if (value === '' || 
 			value.length < 3 || 
@@ -137,7 +138,6 @@ class Index {
 		return filteredUstensils.length == ustensils.length
 	}  
 
-	
 	// recherche globale
 	filterRecipes() {
 		this.filteredRecipes = this.list.filter((recipe) => {
