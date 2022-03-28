@@ -41,77 +41,68 @@ class Index {
 
 	//  ------------- Gestion des selects --------------- 
 
-	
-		selectIngredientsList(){
-		const ingOptions = []
-		for (let index = 0; index < this.filteredRecipes.length; index++) {
-			for (let i = 0; i < this.filteredRecipes[index].ingredients.length; i++) {
-				ingOptions.push(this.filteredRecipes[index].ingredients[i].ingredient)
-			}
-		};
-		return [...new Set(ingOptions)].sort() 
-	} 
+	// Liste des ingredients dans tableau des recettes
+	selectIngredientsList(){
+		let ingredientsList = this.filteredRecipes.map(function(item) {
+			let tmp = item.ingredients.map(function(subItem){
+				return subItem.ingredient
+			});
+		return tmp;
+		}).flat().sort();
+		return [...new Set(ingredientsList)]
+		
+	}
 
 	// Liste des appliances dans tableau des recettes
 	selectAppliancesList() {
-		const appOptions = []
-		for (let index = 0; index < this.filteredRecipes.length; index++) {
-			appOptions.push(this.filteredRecipes[index].appliance)
-		}
-		return [...new Set(appOptions)].sort()
-	} 
+		const appliances = this.filteredRecipes.map(function(item) {
+			return item.appliance
+		}).sort();
+		return [...new Set(appliances)]
+	}
 
 	// Liste des ustensiles dans tableau des recettes
 	selectUstensilsList() {
-	const ustOptions = []
-	for (let index = 0; index < this.filteredRecipes.length; index++) {
-		for (let i = 0; i < this.filteredRecipes[index].ustensils.length; i++) {
-            ustOptions.push(this.filteredRecipes[index].ustensils[i])
-        }
-	}
-	return [...new Set(ustOptions)].sort()
-	} 
+	let ustensilsList = this.filteredRecipes.map(function(item) {
+		let tmp = item.ustensils.map(function(subItem){
+			return subItem
+		});
+		return tmp;
+	}).flat().sort();
 
+	return [...new Set(ustensilsList)]
+	}
+
+
+	
 
 	// --------------- Algorithme de recherche -----------------
 
 	// recherche via la search bar (titres, ustensils, ingredients, appliances)
 
-   
-	filterGlobalRecipe(value, recipe) {
-		if (value === '' || 
-			value.length < 3 || 
-			recipe.name.toLowerCase().trim().includes(value) || 
-			recipe.description.toLowerCase().trim().includes(value)  ||
-			recipe.appliance.toLowerCase().includes(value.toLowerCase()) || 
-			recipe.ustensils.includes(value.toLowerCase())) {
-			return true;
-		}
-
-		// filter for ingredients
-		for (let index = 0; index < recipe.ingredients.length; index++) {
-			const i = recipe.ingredients[index];
-			if (i.ingredient.toLowerCase().includes(value.toLowerCase())) {
-				return true;
-			}
-		} 
-
-		return false;
-    } 
+    filterGlobalRecipe(value, recipe) {
+        if (value === '' || value.length < 3) {
+            return true
+        } 
+		return recipe.name.toLowerCase().trim().includes(value) ||
+		recipe.description.toLowerCase().trim().includes(value) ||
+		recipe.ingredients.filter((i) => {
+			return i.ingredient.toLowerCase().includes(value.toLowerCase())
+		}).length > 0 ||
+		recipe.appliance.toLowerCase().includes(value.toLowerCase()) ||
+		recipe.ustensils.filter((u) => {
+			return u.toLowerCase().includes(value.toLowerCase())
+		}).length > 0
+    }
 
 	// recherche par ingredient
 	filterByIngredient(ingredients, recipe){ 
 		if(ingredients.length == 0) {
 			return true
-		} 
-		let filteredIngredients = []
-		for(let index = 0; index < recipe.ingredients.length; index++) {
-			const i = recipe.ingredients[index]
-			if (ingredients.includes(i.ingredient)) {
-				filteredIngredients.push(true)
-			}
 		}
-		return filteredIngredients.length == ingredients.length
+		return recipe.ingredients.filter((i) => 
+			ingredients.includes(i.ingredient)
+		).length == ingredients.length
 	}
 
 	// recherche par appliance
@@ -127,17 +118,17 @@ class Index {
 		if(ustensils.length == 0) {
 			return true
 		}
-		let filteredUstensils = []
-		for (let index = 0; index < recipe.ustensils.length; index++) {
-			const u = recipe.ustensils[index]
-			if (ustensils.includes(u)) {
-				filteredUstensils.push(true)
-			}
-		}	
-		return filteredUstensils.length == ustensils.length
-	}  
+		return recipe.ustensils.filter((u) =>
+			ustensils.includes(u)
+		).length == ustensils.length
+	}
+
+
+
+
 
 	
+
 	// recherche globale
 	filterRecipes() {
 		this.filteredRecipes = this.list.filter((recipe) => {
