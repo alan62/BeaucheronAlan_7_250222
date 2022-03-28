@@ -1,0 +1,270 @@
+/*---------------------------- VARIABLES ----------------------------------*/
+:root {
+    --font-default: "DM Sans", Arial, Helvetica, sans-serif;
+    --font-slab: var(--font-default);
+    --modal-duration: 0.8s;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /*---------------------------- BODY ----------------------------------*/
+  body {
+    font-family: var(--font-default);
+  }
+  body .maxcontainer {
+    max-width: 1280px;
+    margin: auto;
+  }
+  body header {
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+  body main {
+    padding-top: 5%;
+  }
+  
+  .cooking {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cooking .card_main {
+    width: 30%;
+    margin-bottom: 5%;
+    background-color: #E7E7E7;
+    border-radius: 5px;
+  }
+  .cooking .card_main .img_card {
+    width: 100%;
+    height: 178px;
+    background-color: #C7BEBE;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .cooking .card_main .content_card {
+    width: 100%;
+  }
+  .cooking .card_main .content_card .header_card {
+    width: 100%;
+    padding: 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .cooking .card_main .content_card .header_card .time_card {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    justify-content: space-between;
+  }
+  .cooking .card_main .content_card .header_card .time_card .text_clock {
+    font-weight: bolder;
+  }
+  .cooking .card_main .content_card .description_card {
+    display: flex;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 4%;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .cooking .card_main .content_card .description_card .ingredients_content {
+    font-size: 12px;
+    text-align: left;
+    width: 40%;
+    padding-right: 4%;
+  }
+  .cooking .card_main .content_card .description_card .ingredients_content .list_ingredient {
+    list-style: none;
+  }
+  .cooking .card_main .content_card .description_card .ingredients_content .list_ingredient .text_ingredient {
+    font-weight: bolder;
+  }
+  .cooking .card_main .content_card .description_card .description_content {
+    font-size: 11px;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: left;
+    width: 60%;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .search {
+    margin-bottom: 6%;
+  }
+  
+  .searchbar {
+    width: 100%;
+    position: relative;
+    display: flex;
+    background-color: #E7E7E7;
+    border-radius: 5px;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: none;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px;
+    outline: none;
+    color: black;
+    background-color: #E7E7E7;
+  }
+  
+  .searchTerm:focus {
+    color: black;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: none;
+    background: #E7E7E7;
+    text-align: center;
+    color: black;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  #select-ingredient, #select-ingredient .select-options, #select-ingredient input {
+    background: #3282F7;
+    color: white;
+  }
+  
+  #select-appliance, #select-appliance .select-options, #select-appliance input {
+    background: #68D9A4;
+    color: white;
+  }
+  
+  #select-ustensil, #select-ustensil .select-options, #select-ustensil input {
+    background: #ED6454;
+    color: white;
+  }
+  
+  .select {
+    border-radius: 5px;
+    width: 150px;
+    position: relative;
+    margin-right: 20px;
+    margin-top: 3%;
+  }
+  .select input {
+    border: none;
+    outline: transparent;
+    width: 100%;
+  }
+  .select input ::placeholder {
+    color: white;
+    opacity: 50%;
+  }
+  
+  .select-title {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .select-title-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    width: 100%;
+  }
+  
+  .select-options {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 10;
+    top: 42px;
+    left: 0;
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  .select-option {
+    padding-right: 30px;
+    width: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  
+  .chevron-bottom {
+    transform: rotate(90deg);
+  }
+  
+  .chevron-top {
+    transform: rotate(0deg);
+  }
+  
+  .caret {
+    padding: 10px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  
+  #tags .tag {
+    height: 37px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-inline-start: 7px;
+    padding-inline-end: 7px;
+    font-style: normal;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 2%;
+    margin-right: 20px;
+    padding-top: 8px;
+    display: flex;
+    color: white;
+  }
+  
+  #tags .cross {
+    width: 20px;
+    height: 20px;
+    padding-left: 6px;
+    padding-top: 4px;
+  }
+  
+  #tags .ingredient {
+    background-color: #3282F7;
+  }
+  
+  #tags .appliance {
+    background-color: #68D9A4;
+  }
+  
+  #tags .ustensil {
+    background-color: #ED6454;
+  }
+  
