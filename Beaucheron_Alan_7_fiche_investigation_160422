@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-11-01T09:12:50.458Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="-ArK5OLXY9iPUNxta9l7" version="20.5.1" type="github">
+<mxfile host="app.diagrams.net" modified="2022-11-02T09:20:12.416Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36" etag="J88P4dFtlinp3E55I42f" version="20.5.1" type="github">
   <diagram id="RcNnIyRwJKL37SD33-RE" name="Page-1">
-    <mxGraphModel dx="2249" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="1963" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -249,6 +249,12 @@
         </mxCell>
         <mxCell id="FI6MTQLkNxLRb5Ty7ZV6-80" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;Légende&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Utilisation d’une boucle for sur l’ensemble des recettes. &lt;br/&gt;Création d’un tableau vide, et utilisation de la méthode push si la recette rempli une des conditions de la &lt;br/&gt;recherche." style="rounded=0;whiteSpace=wrap;html=1;shadow=0;glass=0;" vertex="1" parent="1">
           <mxGeometry x="60" y="1650" width="700" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FI6MTQLkNxLRb5Ty7ZV6-82" value="&lt;b&gt;ANNEXES&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="790" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FI6MTQLkNxLRb5Ty7ZV6-83" value="&lt;b&gt;ANNEXES&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="-10" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
