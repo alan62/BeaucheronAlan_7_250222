@@ -42,33 +42,36 @@ class Index {
 	//  ------------- Gestion des selects --------------- 
 
 	// Liste des ingredients dans tableau des recettes
+	// On vient récupérer la liste des subItem dans le fichier JSON dans le parent ingredients et on les classe par ordre alphabétique
 	selectIngredientsList(){
 		let ingredientsList = this.filteredRecipes.map(function(item) {
 			let tmp = item.ingredients.map(function(subItem){
 				return subItem.ingredient
 			});
 		return tmp;
-		}).flat().sort();
+		}).flat().sort((a, b) => a.localeCompare(b));
 		return [...new Set(ingredientsList)]
 		
 	}
 
 	// Liste des appliances dans tableau des recettes
+	// On vient récupérer la liste des appliances dans le fichier JSON
 	selectAppliancesList() {
 		const appliances = this.filteredRecipes.map(function(item) {
 			return item.appliance
-		}).sort();
+		}).flat().sort((a, b) => a.localeCompare(b));
 		return [...new Set(appliances)]
 	}
 
 	// Liste des ustensiles dans tableau des recettes
+	// On vient récupérer la liste des subItem dans le fichier JSON pour y récupérer les ustensils et on les classe par ordre alphabétique 
 	selectUstensilsList() {
 	let ustensilsList = this.filteredRecipes.map(function(item) {
 		let tmp = item.ustensils.map(function(subItem){
 			return subItem
 		});
 		return tmp;
-	}).flat().sort();
+	}).flat().sort((a, b) => a.localeCompare(b));
 
 	return [...new Set(ustensilsList)]
 	}
@@ -78,7 +81,9 @@ class Index {
 
 	// --------------- Algorithme de recherche -----------------
 
-	// recherche via la search bar (titres, ustensils, ingredients, appliances)
+	// recherche via la search bar ( ustensils, ingredients, appliances)
+	// Si il a - de 3 caracteres saisies alors on ne retourne rien 
+	// Sinon on cherche une valeur existante dans les ustensils, appliance ou dans les ingredients
 
     filterGlobalRecipe(value, recipe) {
         if (value === '' || value.length < 3) {
@@ -93,9 +98,11 @@ class Index {
 		recipe.ustensils.filter((u) => {
 			return u.toLowerCase().includes(value.toLowerCase())
 		}).length > 0
+
     }
 
 	// recherche par ingredient
+	// filtre dans les ingredients
 	filterByIngredient(ingredients, recipe){ 
 		if(ingredients.length == 0) {
 			return true
@@ -103,9 +110,12 @@ class Index {
 		return recipe.ingredients.filter((i) => 
 			ingredients.includes(i.ingredient)
 		).length == ingredients.length
+
+
 	}
 
 	// recherche par appliance
+	// filtre dans les appliances
 	filterByAppliance (appliances, recipe) {
 		if(appliances.length == 0) {
 			return true
@@ -114,6 +124,7 @@ class Index {
 	}
 
 	// recherche par ustensile
+	// filtre dans les ustensiles
 	filterByUstensils(ustensils, recipe){
 		if(ustensils.length == 0) {
 			return true
@@ -123,13 +134,11 @@ class Index {
 		).length == ustensils.length
 	}
 
+	// recherche globale 
 
-
-
-
-	
-
-	// recherche globale
+	/* filterRecipes() est la methode qui vient prendre en compte les differentes methodes de filtrage afin de retourner 
+	 une nouvelle liste avec les recettes */
+	 /* filteredRecipes = la liste des recettes qui est filtré */
 	filterRecipes() {
 		this.filteredRecipes = this.list.filter((recipe) => {
 			return this.filterGlobalRecipe(this.query, recipe)
@@ -141,7 +150,9 @@ class Index {
 
 	// ---------------------- affichage et suppression des tags -------------------------
 
-	// option selectionnée select ingredients
+	// option selectionnée select ingredients 
+	// la liste des recettes est filtré en fonction de l'option choisit qui est push dans this.ingredients
+	// appel le template Tag.js  et envoie le contenu dans la div parent #tags ( tag ingredient )
 	selectIngredient(ingredient) {
 		this.ingredients.push(ingredient)
 		this.filterRecipes()
@@ -152,7 +163,7 @@ class Index {
 	}
 
 
-	// sup tag ingredients
+	// suppression du tag ingredient
 	deleteIngredientTag(tagElement, ingredient) {
 		document.querySelector('#tags').removeChild(tagElement)
 		this.ingredients = this.ingredients.filter((i) => {
@@ -163,7 +174,8 @@ class Index {
 		this.renderRecipeDOM(this.filteredRecipes)
 	}
 
-	// option selectionnée select appliances
+	// la liste des recettes est filtré en fonction de l'option choisit qui est push dans this.appliances
+	// appel le template Tag.js  et envoie le contenu dans la div parent #tags ( tag appliance )
 	selectAppliance(appliance) {
 		this.appliances.push(appliance)
 		this.filterRecipes()
@@ -173,7 +185,7 @@ class Index {
 		document.querySelector('#tags').appendChild(tag.render())
 	}
 
-	// sup tag appliances
+	// suppression du tag appliance
 	deleteApplianceTag(tagElement, appliance) {
 		document.querySelector('#tags').removeChild(tagElement)
 		this.appliances = this.appliances.filter((a) => {
@@ -184,7 +196,8 @@ class Index {
 		this.renderRecipeDOM(this.filteredRecipes)
 	}
 
-	// option selectionnée select ustensils
+	// la liste des recettes est filtré en fonction de l'option choisit qui est push dans this.ustensils
+	// appel le template Tag.js  et envoie le contenu dans la div parent #tags ( tag ustensil )
 	selectUstensil(ustensil) {
 		this.ustensils.push(ustensil)
 		this.filterRecipes()
@@ -194,7 +207,7 @@ class Index {
 		document.querySelector('#tags').appendChild(tag.render())
 	}
 
-	// sup tag ustensils
+	// suppression du tag ustensil
 	deleteUstensilTag(tagElement, ustensil) {
 		document.querySelector('#tags').removeChild(tagElement)
 		this.ustensils = this.ustensils.filter((u) => {
@@ -208,6 +221,7 @@ class Index {
 	
 	// ----------------------- render des éléments du DOM -------------------------------
 
+	// rendu de la barre de recherche en faisant appel au fonction de rendu des recettes  selon la valeur saisie et appel du template search.js 
 	renderSearchDOM(){
 		const search = new Search((value) => {
 			this.query = value
@@ -223,6 +237,9 @@ class Index {
 		search.initEvent()
 	}
 
+	 // Création du rendu des 3 menus déroulants avec en première information la div (exemple :select-ingrédient créé dans l'élement parent (#select))
+	 // en 2e info le titre que l'on voit dans le select-title-content 
+	 // l'appel de la fonction afin de pouvoir avoir sa liste d'options de filtrage  
 	renderSelectDOM(){
 		const $select = document.querySelector('#select');
 		$select.innerHTML = '';
@@ -235,6 +252,7 @@ class Index {
 		$select.appendChild(selectUstensils.render());
 	}
 
+	//  Retourne la liste des recettes depuis le fichier recipes.JSON et applique le template venant du fichier Card.js
 	renderCards(list){
 		return list.map(function(list) {
 			const card = new Card(
@@ -247,14 +265,20 @@ class Index {
 		});
 	}
 
+	// La section #cooking reçoit la liste des recettes 
 	renderRecipeDOM(list){
 		const $list = document.querySelector('#cooking')
 		$list.innerHTML = this.renderCards(list).join('')
 	}
 
-	/**
+	/*
 	 * Création du DOM physique
 	 */
+
+	// Rendu du DOM (le contenu de la barre de navigation est envoyé dans le header, l'appel des methodes search select)
+	/*
+	applique le rendu des recettes en prenant en compte les différentes possibilités de filtres ( this.renderRecipeDOM(this.filteredRecipes)
+	*/
 	renderDOM(){
 		const navhome = new NavHome();
 		const $header = document.querySelector('#header');
