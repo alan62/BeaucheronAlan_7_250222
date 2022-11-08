@@ -228,6 +228,12 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+
+  @media screen and (max-width: 768px){ 
+    .select-option {
+      width: 100% !important;
+    }
+  }
   
   .select-option {
     padding-right: 30px;
