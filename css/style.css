@@ -28,14 +28,31 @@
   }
   
   .cooking {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 380px);
   }
+
+
+  @media screen  and (max-width: 1268px) {
+    .cooking {
+     display: grid;
+     grid-template-columns: repeat(2,380px);
+     gap: 20px;
+     width: 95%;
+     margin: 20px auto;}
+ } 
+
+  @media screen  and (max-width: 768px) {
+    .cooking {
+     display: grid;
+     grid-template-columns: 1fr;
+     gap: 20px;
+     width: 95%;
+     margin: 20px auto;}
+ } 
   .cooking .card_main {
-    width: 30%;
+    width: 100%;
+    padding-right: 10px;
     margin-bottom: 5%;
     background-color: #E7E7E7;
     border-radius: 5px;
